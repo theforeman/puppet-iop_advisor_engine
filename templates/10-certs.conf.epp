@@ -1,0 +1,7 @@
+<%- |
+  String[1] $server_cert_secret_name,
+  String[1] $server_key_secret_name,
+| -%>
+[Container]
+Secret=<%= $server_cert_secret_name %>,target=/opt/app-root/src/cert.pem,mode=0440,type=mount
+Secret=<%= $server_key_secret_name %>,target=/opt/app-root/src/key.pem,mode=0440,type=mount

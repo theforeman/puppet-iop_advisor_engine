@@ -1,0 +1,47 @@
+{
+  "name": "theforeman-advisor",
+  "version": "0.0.1",
+  "author": "theforeman",
+  "summary": "Advisor config",
+  "license": "GPL-3.0+",
+  "description": "Module for configuring Advisor",
+  "dependencies": [
+    {
+      "name": "southalc/podman",
+      "version_requirement": ">= 0.7.5 < 1.0.0"
+    },
+    {
+      "name": "katello/certs",
+      "version_requirement": ">= 15.0.0 < 20.0.0"
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 7.0.0 < 9.0.0"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "8",
+        "9"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "8",
+        "9"
+      ]
+    },
+    {
+      "operatingsystem": "AlmaLinux",
+      "operatingsystemrelease": [
+        "8",
+        "9"
+      ]
+    }
+  ]
+}
