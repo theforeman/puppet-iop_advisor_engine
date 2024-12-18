@@ -9,14 +9,23 @@ class advisor (
   include podman
   include certs::advisor
 
-  $service_name = 'insights-satellite-engine'
+  $service_name = 'advisor-engine'
 
   $server_cert_secret_name = "${service_name}-server-cert"
   $server_key_secret_name = "${service_name}-server-key"
+  $server_ca_cert_secret_name = "${service_name}-server-ca-cert"
+
+  $client_cert_secret_name = "${service_name}-client-cert"
+  $client_key_secret_name = "${service_name}-client-key"
+  $client_ca_cert_secret_name = "${service_name}-client-ca-cert"
 
   $context = {
-    'server_cert_secret_name' => $server_cert_secret_name,
-    'server_key_secret_name' => $server_key_secret_name,
+    'server_cert_secret_name'    => $server_cert_secret_name,
+    'server_key_secret_name'     => $server_key_secret_name,
+    'server_ca_cert_secret_name' => $server_ca_cert_secret_name,
+    'client_cert_secret_name'    => $client_cert_secret_name,
+    'client_key_secret_name'     => $client_key_secret_name,
+    'client_ca_cert_secret_name' => $client_ca_cert_secret_name,
   }
 
   file { '/etc/advisor':
@@ -43,11 +52,27 @@ class advisor (
   }
 
   podman::secret { $server_cert_secret_name:
-    path => $certs::advisor::advisor_server_cert,
+    path => $certs::advisor::server_cert,
   }
 
   podman::secret { $server_key_secret_name:
-    path => $certs::advisor::advisor_server_key,
+    path => $certs::advisor::server_key,
+  }
+
+  podman::secret { $server_ca_cert_secret_name:
+    path => $certs::advisor::server_ca_cert,
+  }
+
+  podman::secret { $client_cert_secret_name:
+    path => $certs::advisor::client_cert,
+  }
+
+  podman::secret { $client_key_secret_name:
+    path => $certs::advisor::client_key,
+  }
+
+  podman::secret { $client_ca_cert_secret_name:
+    path => $certs::advisor::client_ca_cert,
   }
 
   service { $service_name:
