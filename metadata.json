@@ -4,6 +4,7 @@
   "author": "theforeman",
   "summary": "Advisor config",
   "license": "GPL-3.0+",
+  "source": "https://github.com/ehelms/puppet-advisor",
   "description": "Module for configuring Advisor",
   "dependencies": [
     {
