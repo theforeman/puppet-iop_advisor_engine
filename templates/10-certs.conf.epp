@@ -1,7 +1,15 @@
 <%- |
   String[1] $server_cert_secret_name,
   String[1] $server_key_secret_name,
+  String[1] $server_ca_cert_secret_name,
+  String[1] $client_cert_secret_name,
+  String[1] $client_key_secret_name,
+  String[1] $client_ca_cert_secret_name,
 | -%>
 [Container]
 Secret=<%= $server_cert_secret_name %>,target=/opt/app-root/src/cert.pem,mode=0440,type=mount
 Secret=<%= $server_key_secret_name %>,target=/opt/app-root/src/key.pem,mode=0440,type=mount
+Secret=<%= $server_ca_cert_secret_name %>,target=/opt/app-root/src/ca.pem,mode=0440,type=mount
+Secret=<%= $client_cert_secret_name %>,target=/opt/app-root/src/client_cert.pem,mode=0440,type=mount
+Secret=<%= $client_key_secret_name %>,target=/opt/app-root/src/client_key.pem,mode=0440,type=mount
+Secret=<%= $client_ca_cert_secret_name %>,target=/opt/app-root/src/client_ca.pem,mode=0440,type=mount

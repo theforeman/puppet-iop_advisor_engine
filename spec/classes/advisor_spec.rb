@@ -15,15 +15,19 @@ describe 'advisor' do
             with_ensure('directory')
         end
         it do
-          is_expected.to contain_file('/etc/containers/systemd/insights-satellite-engine.container.d').
+          is_expected.to contain_file('/etc/containers/systemd/advisor-engine.container.d').
             with_ensure('directory')
         end
         it do
-          is_expected.to contain_file('/etc/containers/systemd/insights-satellite-engine.container.d/10-certs.conf').
+          is_expected.to contain_file('/etc/containers/systemd/advisor-engine.container.d/10-certs.conf').
             with_content(<<~MSG
               [Container]
-              Secret=insights-satellite-engine-server-cert,target=/opt/app-root/src/cert.pem,mode=0440,type=mount
-              Secret=insights-satellite-engine-server-key,target=/opt/app-root/src/key.pem,mode=0440,type=mount
+              Secret=advisor-engine-server-cert,target=/opt/app-root/src/cert.pem,mode=0440,type=mount
+              Secret=advisor-engine-server-key,target=/opt/app-root/src/key.pem,mode=0440,type=mount
+              Secret=advisor-engine-server-ca-cert,target=/opt/app-root/src/ca.pem,mode=0440,type=mount
+              Secret=advisor-engine-client-cert,target=/opt/app-root/src/client_cert.pem,mode=0440,type=mount
+              Secret=advisor-engine-client-key,target=/opt/app-root/src/client_key.pem,mode=0440,type=mount
+              Secret=advisor-engine-client-ca-cert,target=/opt/app-root/src/client_ca.pem,mode=0440,type=mount
               MSG
             )
         end
