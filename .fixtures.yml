@@ -1,0 +1,10 @@
+---
+fixtures:
+  repositories:
+    certs:
+      repo: "https://github.com/ehelms/puppet-certs.git"
+      branch: "advisor-certs"
+    extlib: 'https://github.com/voxpupuli/puppet-extlib'
+    podman: 'https://github.com/southalc/podman'
+    selinux_core: 'https://github.com/puppetlabs/puppetlabs-selinux_core'
+    stdlib: 'https://github.com/puppetlabs/puppetlabs-stdlib'
