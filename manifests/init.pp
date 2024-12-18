@@ -34,7 +34,7 @@ class advisor (
   }
 
   file { "/etc/containers/systemd/${service_name}.container.d/10-certs.conf":
-    ensure  => present,
+    ensure  => file,
     mode    => '0640',
     owner   => 'root',
     group   => 'root',
