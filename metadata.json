@@ -8,6 +8,14 @@
   "description": "Module for configuring Advisor",
   "dependencies": [
     {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 9.0.0 < 10.0.0"
+    },
+    {
+      "name": "puppet/extlib",
+      "version_requirement": ">= 3.0.0 < 8.0.0"
+    },
+    {
       "name": "southalc/podman",
       "version_requirement": ">= 0.7.5 < 1.0.0"
     },
