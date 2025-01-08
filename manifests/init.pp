@@ -78,6 +78,13 @@ class advisor (
   service { $service_name:
     ensure => running,
     enable => true,
-    require => Podman::Secret[$server_cert_secret_name, $server_key_secret_name, $server_ca_cert_secret_name, $client_cert_secret_name, $client_key_secret_name, $client_ca_cert_secret_name],
+    require => Podman::Secret[
+      $server_cert_secret_name,
+      $server_key_secret_name,
+      $server_ca_cert_secret_name,
+      $client_cert_secret_name,
+      $client_key_secret_name,
+      $client_ca_cert_secret_name
+    ],
   }
 }
