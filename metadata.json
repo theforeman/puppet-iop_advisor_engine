@@ -1,10 +1,10 @@
 {
-  "name": "theforeman-advisor",
+  "name": "theforeman-iop_advisor_engine",
   "version": "0.0.1",
   "author": "theforeman",
   "summary": "Advisor config",
   "license": "GPL-3.0+",
-  "source": "https://github.com/ehelms/puppet-advisor",
+  "source": "https://github.com/ehelms/puppet-iop-advisor-engine",
   "description": "Module for configuring Advisor",
   "dependencies": [
     {

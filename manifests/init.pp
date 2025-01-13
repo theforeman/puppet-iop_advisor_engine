@@ -1,15 +1,15 @@
-# == Class: advisor
+# == Class: iop-advisor-engine
 #
-# Install and configure advisor
+# Install and configure the advisor engine
 #
 # === Parameters:
 #
-class advisor (
+class iop_advisor_engine (
 ) {
   include podman
-  include certs::advisor
+  include certs::iop_advisor_engine
 
-  $service_name = 'advisor-engine'
+  $service_name = 'iop-advisor-engine'
 
   $server_cert_secret_name = "${service_name}-server-cert"
   $server_key_secret_name = "${service_name}-server-key"
@@ -28,7 +28,7 @@ class advisor (
     'client_ca_cert_secret_name' => $client_ca_cert_secret_name,
   }
 
-  file { '/etc/advisor':
+  file { '/etc/iop-advisor-engine':
     ensure => directory,
     mode   => '0755',
     owner  => 'root',
@@ -47,32 +47,32 @@ class advisor (
     mode    => '0640',
     owner   => 'root',
     group   => 'root',
-    content => epp('advisor/10-certs.conf.epp', $context),
+    content => epp('iop_advisor_engine/10-certs.conf.epp', $context),
     notify  => Service[$service_name],
   }
 
   podman::secret { $server_cert_secret_name:
-    path => $certs::advisor::server_cert,
+    path => $certs::iop_advisor_engine::server_cert,
   }
 
   podman::secret { $server_key_secret_name:
-    path => $certs::advisor::server_key,
+    path => $certs::iop_advisor_engine::server_key,
   }
 
   podman::secret { $server_ca_cert_secret_name:
-    path => $certs::advisor::server_ca_cert,
+    path => $certs::iop_advisor_engine::server_ca_cert,
   }
 
   podman::secret { $client_cert_secret_name:
-    path => $certs::advisor::client_cert,
+    path => $certs::iop_advisor_engine::client_cert,
   }
 
   podman::secret { $client_key_secret_name:
-    path => $certs::advisor::client_key,
+    path => $certs::iop_advisor_engine::client_key,
   }
 
   podman::secret { $client_ca_cert_secret_name:
-    path => $certs::advisor::client_ca_cert,
+    path => $certs::iop_advisor_engine::client_ca_cert,
   }
 
   service { $service_name:
