@@ -4,12 +4,16 @@
 #
 # === Parameters:
 #
+# $image::  The container image
+#
 class iop_advisor_engine (
+  String[1] $image = 'quay.io/evgeni/fake-iop-engine',
 ) {
   include podman
   include certs::iop_advisor_engine
 
   $service_name = 'iop-advisor-engine'
+  $log_dir = "/var/log/${service_name}"
 
   $server_cert_secret_name = "${service_name}-server-cert"
   $server_key_secret_name = "${service_name}-server-key"
@@ -28,13 +32,6 @@ class iop_advisor_engine (
     'client_ca_cert_secret_name' => $client_ca_cert_secret_name,
   }
 
-  file { '/etc/iop-advisor-engine':
-    ensure => directory,
-    mode   => '0755',
-    owner  => 'root',
-    group  => 'root',
-  }
-
   file { "/etc/containers/systemd/${service_name}.container.d":
     ensure => directory,
     mode   => '0755',
@@ -48,7 +45,7 @@ class iop_advisor_engine (
     owner   => 'root',
     group   => 'root',
     content => epp('iop_advisor_engine/10-certs.conf.epp', $context),
-    notify  => Service[$service_name],
+    notify  => Podman::Quadlet[$service_name],
   }
 
   podman::secret { $server_cert_secret_name:
@@ -75,10 +72,48 @@ class iop_advisor_engine (
     path => $certs::iop_advisor_engine::client_ca_cert,
   }
 
-  service { $service_name:
-    ensure  => running,
-    enable  => true,
-    require => Podman::Secret[
+  file { $log_dir:
+    ensure => directory,
+    mode   => '0755',
+    owner  => 'root',
+    group  => 'root',
+  }
+
+  ['uploads', 'failed', 'logs'].each |String $file| {
+    file { "${log_dir}/${file}":
+      ensure => directory,
+      mode   => '0755',
+      owner  => 'root',
+      group  => 'root',
+    }
+  }
+
+  podman::quadlet { $service_name:
+    ensure       => 'present',
+    quadlet_type => 'container',
+    user         => 'root',
+    defaults     => {},
+    settings     => {
+      'Unit'      => {
+        'Description' => 'Advisor Engine',
+      },
+      'Container' => {
+        'Image'   => $image,
+        'Network' => 'host',
+        'Volume'  => [
+          "${log_dir}/uploads:/opt/app-root/src/uploads",
+          "${log_dir}/failed:/opt/app-root/src/failed",
+          "${log_dir}/logs:/opt/app-root/src/logs",
+        ],
+      },
+      'Service'   => {
+        'Restart' => 'always',
+      },
+      'Install'   => {
+        'WantedBy' => 'default.target',
+      },
+    },
+    require      => Podman::Secret[
       $server_cert_secret_name,
       $server_key_secret_name,
       $server_ca_cert_secret_name,

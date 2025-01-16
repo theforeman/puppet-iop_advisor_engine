@@ -6,7 +6,9 @@ fixtures:
       branch: "advisor-certs"
     extlib: 'https://github.com/voxpupuli/puppet-extlib'
     foreman:       "https://github.com/theforeman/puppet-foreman.git"
+    hashfile: "https://github.com/southalc/hashfile"
     redis:         "https://github.com/voxpupuli/puppet-redis"
     podman: 'https://github.com/southalc/podman'
     selinux_core: 'https://github.com/puppetlabs/puppetlabs-selinux_core'
     stdlib: 'https://github.com/puppetlabs/puppetlabs-stdlib'
+    systemd: 'https://github.com/voxpupuli/puppet-systemd'
