@@ -32,6 +32,27 @@ describe 'iop_advisor_engine' do
             )
         end
       end
+
+      describe 'with ensure absent' do
+        let :params do
+          {ensure: 'absent'}
+        end
+
+        it { should compile.with_all_deps }
+
+        it do
+          is_expected.to contain_file('/etc/containers/systemd/iop-advisor-engine.container.d').
+            with_ensure('absent')
+        end
+        it do
+          is_expected.to contain_file('/etc/containers/systemd/iop-advisor-engine.container.d/10-certs.conf').
+            with_ensure('absent')
+        end
+        it do
+          is_expected.to contain_podman__quadlet('iop-advisor-engine').
+            with_ensure('absent')
+        end
+      end
     end
   end
 end
