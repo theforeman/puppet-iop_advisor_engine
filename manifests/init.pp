@@ -6,8 +6,11 @@
 #
 # $image::  The container image
 #
+# $ensure:: Ensure service is present or absent
+#
 class iop_advisor_engine (
   String[1] $image = 'quay.io/evgeni/fake-iop-engine',
+  Enum['present', 'absent'] $ensure = 'present',
 ) {
   include podman
   include certs::iop_advisor_engine
@@ -32,15 +35,21 @@ class iop_advisor_engine (
     'client_ca_cert_secret_name' => $client_ca_cert_secret_name,
   }
 
+  $directory_ensure = $ensure ? {
+    'present' => 'directory',
+    'absent'  => 'absent',
+  }
+
   file { "/etc/containers/systemd/${service_name}.container.d":
-    ensure => directory,
+    ensure => $directory_ensure,
+    force  => true,
     mode   => '0755',
     owner  => 'root',
     group  => 'root',
   }
 
   file { "/etc/containers/systemd/${service_name}.container.d/10-certs.conf":
-    ensure  => file,
+    ensure  => $ensure,
     mode    => '0640',
     owner   => 'root',
     group   => 'root',
@@ -49,31 +58,38 @@ class iop_advisor_engine (
   }
 
   podman::secret { $server_cert_secret_name:
-    path => $certs::iop_advisor_engine::server_cert,
+    ensure => $ensure,
+    path   => $certs::iop_advisor_engine::server_cert,
   }
 
   podman::secret { $server_key_secret_name:
-    path => $certs::iop_advisor_engine::server_key,
+    ensure => $ensure,
+    path   => $certs::iop_advisor_engine::server_key,
   }
 
   podman::secret { $server_ca_cert_secret_name:
-    path => $certs::iop_advisor_engine::server_ca_cert,
+    ensure => $ensure,
+    path   => $certs::iop_advisor_engine::server_ca_cert,
   }
 
   podman::secret { $client_cert_secret_name:
-    path => $certs::iop_advisor_engine::client_cert,
+    ensure => $ensure,
+    path   => $certs::iop_advisor_engine::client_cert,
   }
 
   podman::secret { $client_key_secret_name:
-    path => $certs::iop_advisor_engine::client_key,
+    ensure => $ensure,
+    path   => $certs::iop_advisor_engine::client_key,
   }
 
   podman::secret { $client_ca_cert_secret_name:
-    path => $certs::iop_advisor_engine::client_ca_cert,
+    ensure => $ensure,
+    path   => $certs::iop_advisor_engine::client_ca_cert,
   }
 
   file { $log_dir:
-    ensure => directory,
+    ensure => $directory_ensure,
+    force  => true,
     mode   => '0755',
     owner  => 'root',
     group  => 'root',
@@ -81,7 +97,8 @@ class iop_advisor_engine (
 
   ['uploads', 'failed', 'logs'].each |String $file| {
     file { "${log_dir}/${file}":
-      ensure => directory,
+      ensure => $directory_ensure,
+      force  => true,
       mode   => '0755',
       owner  => 'root',
       group  => 'root',
@@ -89,7 +106,7 @@ class iop_advisor_engine (
   }
 
   podman::quadlet { $service_name:
-    ensure       => 'present',
+    ensure       => $ensure,
     quadlet_type => 'container',
     user         => 'root',
     defaults     => {},
