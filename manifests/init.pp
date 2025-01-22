@@ -87,11 +87,6 @@ class iop_advisor_engine (
     path   => $certs::iop_advisor_engine::client_ca_cert,
   }
 
-  $service_ensure = $ensure ? {
-    'present' => true,
-    'absent'  => false,
-  }
-
   file { $log_dir:
     ensure => $directory_ensure,
     force  => true,
