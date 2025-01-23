@@ -9,7 +9,7 @@
 # $ensure:: Ensure service is present or absent
 #
 class iop_advisor_engine (
-  String[1] $image = 'quay.io/evgeni/fake-iop-engine',
+  String[1] $image = 'ghcr.io/redhatinsights/iop-advisor-engine',
   Enum['present', 'absent'] $ensure = 'present',
 ) {
   include podman
@@ -117,11 +117,6 @@ class iop_advisor_engine (
       'Container' => {
         'Image'   => $image,
         'Network' => 'host',
-        'Volume'  => [
-          "${log_dir}/uploads:/opt/app-root/src/uploads",
-          "${log_dir}/failed:/opt/app-root/src/failed",
-          "${log_dir}/logs:/opt/app-root/src/logs",
-        ],
       },
       'Service'   => {
         'Restart' => 'always',
