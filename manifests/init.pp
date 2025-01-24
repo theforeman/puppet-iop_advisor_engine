@@ -1,4 +1,4 @@
-# == Class: iop-advisor-engine
+# == Class: iop_advisor_engine
 #
 # Install and configure the advisor engine
 #
