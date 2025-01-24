@@ -4,7 +4,7 @@
   "author": "theforeman",
   "summary": "Advisor config",
   "license": "GPL-3.0+",
-  "source": "https://github.com/ehelms/puppet-iop-advisor-engine",
+  "source": "https://github.com/theforeman/puppet-iop_advisor_engine",
   "description": "Module for configuring Advisor",
   "dependencies": [
     {
