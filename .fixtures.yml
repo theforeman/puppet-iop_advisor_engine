@@ -1,9 +1,7 @@
 ---
 fixtures:
   repositories:
-    certs:
-      repo: "https://github.com/ehelms/puppet-certs.git"
-      branch: "advisor-certs"
+    certs: "https://github.com/theforeman/puppet-certs.git"
     extlib: 'https://github.com/voxpupuli/puppet-extlib'
     foreman:       "https://github.com/theforeman/puppet-foreman.git"
     hashfile: "https://github.com/southalc/hashfile"
