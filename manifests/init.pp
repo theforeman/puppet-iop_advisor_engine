@@ -8,9 +8,12 @@
 #
 # $ensure:: Ensure service is present or absent
 #
+# $foreman_url:: URL of the Foreman server advisor engine should report back to
+#
 class iop_advisor_engine (
   String[1] $image = 'ghcr.io/redhatinsights/iop-advisor-engine',
   Enum['present', 'absent'] $ensure = 'present',
+  Stdlib::HTTPUrl $foreman_url = "https://${facts['networking']['fqdn']}"
 ) {
   include podman
   include certs::iop_advisor_engine
@@ -115,8 +118,11 @@ class iop_advisor_engine (
         'Description' => 'Advisor Engine',
       },
       'Container' => {
-        'Image'   => $image,
-        'Network' => 'host',
+        'Image'       => $image,
+        'Network'     => 'host',
+        'Environment' => {
+          'FOREMAN_URL' => $foreman_url,
+        },
       },
       'Service'   => {
         'Restart' => 'always',
