@@ -11,6 +11,10 @@ describe 'basic installation' do
     end
 
     include_examples 'the default iop-advisor-engine application'
+
+    describe command('podman exec systemd-iop-advisor-engine env') do
+      its(:stdout) { should match /^FOREMAN_URL=https/ }
+    end
   end
 
   context 'with ensure false' do

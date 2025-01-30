@@ -120,9 +120,9 @@ class iop_advisor_engine (
       'Container' => {
         'Image'       => $image,
         'Network'     => 'host',
-        'Environment' => {
-          'FOREMAN_URL' => $foreman_url,
-        },
+        'Environment' => [
+          "FOREMAN_URL=${foreman_url}",
+        ],
       },
       'Service'   => {
         'Restart' => 'always',
