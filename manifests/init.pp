@@ -15,8 +15,10 @@ class iop_advisor_engine (
   Enum['present', 'absent'] $ensure = 'present',
   Stdlib::HTTPUrl $foreman_url = "https://${facts['networking']['fqdn']}"
 ) {
-  include podman
-  include certs::iop_advisor_engine
+  if $ensure == 'present' {
+    include podman
+    include certs::iop_advisor_engine
+  }
 
   $service_name = 'iop-advisor-engine'
   $log_dir = "/var/log/${service_name}"
