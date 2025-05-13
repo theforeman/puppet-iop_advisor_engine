@@ -21,7 +21,7 @@
     },
     {
       "name": "katello/certs",
-      "version_requirement": ">= 20.0.0 < 21.0.0"
+      "version_requirement": ">= 20.0.0 < 22.0.0"
     }
   ],
   "requirements": [
