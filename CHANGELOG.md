@@ -1,6 +1,14 @@
 # Changelog
 
-## [0.1.0](https://github.com/theforeman/puppet-iop_advisor_engine/tree/0.1.0) (2025-02-12)
+## [0.2.0](https://github.com/theforeman/puppet-iop_advisor_engine/tree/0.2.0) (2025-05-13)
+
+[Full Changelog](https://github.com/theforeman/puppet-iop_advisor_engine/compare/0.1.0...0.2.0)
+
+**Implemented enhancements:**
+
+- Mark compatible with katello/certs 21.x [\#20](https://github.com/theforeman/puppet-iop_advisor_engine/pull/20) ([ekohl](https://github.com/ekohl))
+
+## [0.1.0](https://github.com/theforeman/puppet-iop_advisor_engine/tree/0.1.0) (2025-02-13)
 
 [Full Changelog](https://github.com/theforeman/puppet-iop_advisor_engine/compare/c362b3ddcae900dd1e2be0e8ce08ad3728b89b6d...0.1.0)
 
