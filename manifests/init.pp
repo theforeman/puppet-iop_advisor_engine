@@ -16,7 +16,15 @@ class iop_advisor_engine (
   Stdlib::HTTPUrl $foreman_url = "https://${facts['networking']['fqdn']}"
 ) {
   include podman
-  include certs::iop_advisor_engine
+
+  $certs_deploy = $ensure ? {
+    'present' => true,
+    'absent'  => false,
+  }
+
+  class { 'certs::iop_advisor_engine':
+    deploy => $certs_deploy,
+  }
 
   $service_name = 'iop-advisor-engine'
   $log_dir = "/var/log/${service_name}"
