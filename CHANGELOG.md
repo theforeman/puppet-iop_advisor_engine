@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/theforeman/puppet-iop_advisor_engine/tree/0.3.0) (2025-08-07)
+
+[Full Changelog](https://github.com/theforeman/puppet-iop_advisor_engine/compare/0.2.0...0.3.0)
+
+**Implemented enhancements:**
+
+- Do not deploy certs if absent [\#22](https://github.com/theforeman/puppet-iop_advisor_engine/pull/22) ([ehelms](https://github.com/ehelms))
+
 ## [0.2.0](https://github.com/theforeman/puppet-iop_advisor_engine/tree/0.2.0) (2025-05-13)
 
 [Full Changelog](https://github.com/theforeman/puppet-iop_advisor_engine/compare/0.1.0...0.2.0)
