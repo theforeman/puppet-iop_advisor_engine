@@ -1,6 +1,14 @@
 # Changelog
 
-## [0.3.0](https://github.com/theforeman/puppet-iop_advisor_engine/tree/0.3.0) (2025-08-07)
+## [0.4.0](https://github.com/theforeman/puppet-iop_advisor_engine/tree/0.4.0) (2026-06-09)
+
+[Full Changelog](https://github.com/theforeman/puppet-iop_advisor_engine/compare/0.3.0...0.4.0)
+
+**Implemented enhancements:**
+
+- puppet/extlib: Allow 8.x [\#24](https://github.com/theforeman/puppet-iop_advisor_engine/pull/24) ([bastelfreak](https://github.com/bastelfreak))
+
+## [0.3.0](https://github.com/theforeman/puppet-iop_advisor_engine/tree/0.3.0) (2025-08-08)
 
 [Full Changelog](https://github.com/theforeman/puppet-iop_advisor_engine/compare/0.2.0...0.3.0)
 
