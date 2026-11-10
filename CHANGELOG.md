@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.0](https://github.com/theforeman/puppet-iop_advisor_engine/tree/0.5.0) (2026-11-10)
+
+[Full Changelog](https://github.com/theforeman/puppet-iop_advisor_engine/compare/0.4.0...0.5.0)
+
+**Implemented enhancements:**
+
+- Allow puppetlabs/stdlib 10.x, katello/certs 22.x [\#27](https://github.com/theforeman/puppet-iop_advisor_engine/pull/27) ([evgeni](https://github.com/evgeni))
+
 ## [0.4.0](https://github.com/theforeman/puppet-iop_advisor_engine/tree/0.4.0) (2026-06-09)
 
 [Full Changelog](https://github.com/theforeman/puppet-iop_advisor_engine/compare/0.3.0...0.4.0)
